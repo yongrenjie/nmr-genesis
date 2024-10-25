@@ -473,6 +473,17 @@ for (i = 0; i < nbl; i++) {
     if (nus == 1) {
     	char path_vclist[256], path_nuslist[256];
         strcpy(path_vclist, ACQUPATH("vclist"));
+
+        // In TS 4.2.0, vclist is stored in {expno}/lists/vc/noah -- if it is
+        // found there, we copy it to the {expno}/vclist file before continuing
+        char vclist[32], path_vclist_ts42[PATH_MAX];  
+        FETCHPARS("VCLIST", &vclist);
+        strcpy(path_vclist_ts42,ACQUPATH("lists/vc/") );
+        strcat(path_vclist_ts42, vclist);
+        if (access(path_vclist_ts42, 0) == 0) {
+            dircp(path_vclist_ts42, path_vclist);
+        }
+
         strcpy(path_nuslist, ACQUPATH("nuslist"));
         if (access(path_vclist, F_OK) == 0) {
             rename(path_vclist, path_nuslist);
