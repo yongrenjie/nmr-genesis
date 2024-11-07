@@ -192,3 +192,9 @@ div#warning {
     text-align: center;
     color: #ff0000;
 }
+
+div#version {
+    display: flex;
+    justify-content: center;
+    font-size: 90%;
+}

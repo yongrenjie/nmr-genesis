@@ -480,7 +480,7 @@ setModuleGridRows();
 // }}}2
 // Modify version number-dependent parts (incl. download links for scripts) {{{2
 // Update the version number on the page
-document.getElementById("version")!.innerHTML = version;
+document.getElementById("version-number")!.innerHTML = version;
 /**
  * Automatically generates the links to the newest scripts, based on the
  * version number.

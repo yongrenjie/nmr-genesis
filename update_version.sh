@@ -3,6 +3,7 @@
 # Script to automatically update genesis version numbers. Updates the following list of files:
 #   - package.json (and package-lock.json, via npm install)
 #   - src/version.js
+#   - index.html (date only, not version number)
 #   - any file in scripts/ (recursively)
 # and also automatically creates the noah_scripts_vX.Y.Z.zip file in static/downloads/.
 #
@@ -86,6 +87,8 @@ for fname in scripts/au/*; do
     "${sed_command[@]}" "s/${old_vno}/${new_vno}/g" "$fname"
     "${sed_command[@]}" "s/${old_date}/${new_date}/g" "$fname"
 done
+# Also modify the website
+"${sed_command[@]}" "s/last update ${old_date}/last update ${new_date}/g" index.html
 
 # Create zip file of scripts
 long_name="noah_scripts_v${new_vno}"
